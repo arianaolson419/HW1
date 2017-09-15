@@ -5,11 +5,11 @@ module demorgan
   output nA,         // Output intermediate complemented inputs
   output nB,
   output nAandnB,     // Single bit output, (~A)*(~B)
-  output nAornB,
-  output AandB,
-  output nAandB,
-  output AorB,
-  output nAorB
+  output nAornB,     // Single bit output, (~A) + (~B)
+  output AandB,      // Output intermediate A * B
+  output nAandB,     // Single bit output, ~(A * B)
+  output AorB,       // Output intermediate A + B
+  output nAorB       // Single bit output, ~(A + B)
 );
 
   wire nA;
@@ -30,7 +30,7 @@ module demorgan
   and andgate(AandB, A, B);
   or orgate(AorB, A, B);
 
-  not AndBinv(nAandB, AandB);
+  not AandBinv(nAandB, AandB);
   not AorBinv(nAorB, AorB);
 
 endmodule
